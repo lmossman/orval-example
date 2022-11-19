@@ -113,8 +113,8 @@ components:
           type: string
         tag:
           type: string
-        location:
-          $ref: location.json
+        breed:
+          $ref: breed.json
     Pets:
       type: array
       items:
