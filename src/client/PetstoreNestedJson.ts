@@ -6,9 +6,10 @@
  */
 import axios from "axios";
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
-export interface PathToSchemaBreed {
+export interface PathToSchemaBreedNested {
   name: string;
   size: string;
+  ancestry: Ancestry;
 }
 
 export type CreatePetsBody = {
@@ -27,7 +28,7 @@ export interface Pet {
   id: number;
   name: string;
   tag?: string;
-  breed?: Breed;
+  breed?: BreedNested;
 }
 
 export type Pets = Pet[];

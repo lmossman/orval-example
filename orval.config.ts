@@ -8,4 +8,11 @@ export default defineConfig({
       prettier: true,
     },
   },
+  apiNestedJson: {
+    input: "./src/petstore_nested_json.yaml",
+    output: {
+      target: "./src/client/PetstoreNestedJson.ts",
+      prettier: true,
+    },
+  },
 });

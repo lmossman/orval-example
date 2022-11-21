@@ -114,7 +114,7 @@ components:
         tag:
           type: string
         breed:
-          $ref: path/to/schema/breed.json
+          $ref: path/to/schema/breed_nested.json
     Pets:
       type: array
       items:
