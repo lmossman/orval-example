@@ -115,6 +115,8 @@ components:
           type: string
         breed:
           $ref: path/to/schema/breed.json
+        manifest:
+          $ref: path/to/schema/config_component_schema.json
     Pets:
       type: array
       items:

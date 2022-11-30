@@ -1,12 +1,42 @@
 {
   "type": "object",
-  "required": ["name", "size"],
+  "additionalProperties": false,
+  "required": ["name", "size", "ancestry"],
   "properties": {
     "name": {
       "type": "string"
     },
     "size": {
       "type": "string"
+    },
+    "ancestry": {
+      "$ref": "#/definitions/Ancestry"
+    }
+  },
+  "definitions": {
+    "Ancestry": {
+      "type": "object",
+      "required": ["timespan_years"],
+      "properties": {
+        "origin_location": {
+          "$ref": "#/definitions/OriginLocation"
+        },
+        "timespan_years": {
+          "type": "number"
+        }
+      }
+    },
+    "OriginLocation": {
+      "type": "object",
+      "required": ["country"],
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        }
+      }
     }
   }
 }
