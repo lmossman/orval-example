@@ -36,7 +36,24 @@
       "required": ["schema_loader", "retriever", "config"],
       "properties": {
         "schema_loader": {
-          "$ref": "#/definitions/JsonSchema"
+          "anyOf": [
+            {
+              "$ref": "#/definitions/JsonFileSchemaLoader"
+            },
+            {
+              "$ref": "#/definitions/DefaultSchemaLoader"
+            }
+          ]
+        },
+        "_schema_loader": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/JsonFileSchemaLoader"
+            },
+            {
+              "$ref": "#/definitions/DefaultSchemaLoader"
+            }
+          ]
         },
         "retriever": {
           "$ref": "#/definitions/SimpleRetriever"
@@ -138,10 +155,54 @@
       },
       "description": "\n    Wrapper around a raw string to be interpolated with the Jinja2 templating engine\n\n    Attributes:\n        string (str): The string to evalute\n        default (Optional[str]): The default value to return if the evaluation returns an empty string\n        options (Mapping[str, Any]): Additional runtime parameters to be used for string interpolation\n    "
     },
+    "JsonFileSchemaLoader": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SchemaLoader"
+        },
+        {
+          "type": "object",
+          "required": ["config"],
+          "properties": {
+            "config": {
+              "type": "object"
+            },
+            "file_path": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/InterpolatedString"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "description": "\n    Loads the schema from a json file\n\n    Attributes:\n        file_path (Union[InterpolatedString, str]): The path to the json file describing the schema\n        name (str): The stream's name\n        config (Config): The user-provided configuration as specified by the source's spec\n        options (Mapping[str, Any]): Additional arguments to pass to the string interpolation if needed\n    "
+    },
     "SchemaLoader": {
       "type": "object",
       "properties": {},
       "description": "Describes a stream's schema"
+    },
+    "DefaultSchemaLoader": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SchemaLoader"
+        },
+        {
+          "type": "object",
+          "required": ["config"],
+          "properties": {
+            "config": {
+              "type": "object"
+            }
+          }
+        }
+      ],
+      "description": "\n    Loads a schema from the default location or returns an empty schema for streams that have not defined their schema file yet.\n\n    Attributes:\n        config (Config): The user-provided configuration as specified by the source's spec\n        options (Mapping[str, Any]): Additional arguments to pass to the string interpolation if needed\n    "
     },
     "SimpleRetriever": {
       "allOf": [
