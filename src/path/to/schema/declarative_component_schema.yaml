@@ -1,0 +1,45 @@
+"$schema": http://json-schema.org/draft-07/schema#
+title: DeclarativeSource
+type: object
+description: description
+version: 1.0.0
+required:
+  - add_fields
+properties:
+  add_fields:
+    "$ref": "#/definitions/AddFields"
+definitions:
+  AddedFieldDefinition:
+    description: Defines the field to add on a record
+    type: object
+    required:
+      - type
+      - path
+      - value
+    properties:
+      type:
+        type: string
+        enum: [AddedFieldDefinition]
+      path:
+        type: array
+        items:
+          type: string
+      value:
+        type: string
+  AddFields:
+    description: Transformation which adds field to an output record. The path of the added field can be nested.
+    type: object
+    required:
+      - type
+      - fields
+    properties:
+      type:
+        type: string
+        enum: [AddFields]
+      fields:
+        type: array
+        items:
+          - "$ref": "#/definitions/AddedFieldDefinition"
+      $options:
+        type: object
+        additionalProperties: true

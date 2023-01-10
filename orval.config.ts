@@ -2,9 +2,9 @@ import { defineConfig } from "orval";
 
 export default defineConfig({
   api: {
-    input: "./src/petstore.yaml",
+    input: "./src/openapi.yaml",
     output: {
-      target: "./src/client/Petstore.ts",
+      target: "./src/client/Client.ts",
       prettier: true,
     },
   },
